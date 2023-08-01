@@ -19,7 +19,8 @@ const CreateUser =  async(req,res)=>{
             }
         }
         const authToken = jwt.sign(data, process.env.JWT_SECRET);
-        return res.status(201).json({ authToken });
+        res.setHeader('auth-token',authToken)
+        return res.status(201).send({authToken})
     } catch (error) {
         res.status(500).json({error:'msg:internal server error '})
         console.log(error)
